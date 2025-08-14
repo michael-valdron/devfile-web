@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-import { defineConfig } from 'cypress';
-import { nxE2EPreset } from '@nrwl/cypress/plugins/cypress-preset';
+const cypress = require('cypress');
+const nxPreset = require('@nrwl/cypress/plugins/cypress-preset');
 
-export default defineConfig({
-  e2e: nxE2EPreset(__dirname),
+module.exports = cypress.defineConfig({
+  e2e: {
+    ...nxPreset.nxE2EPreset(__dirname)
+  },
 });

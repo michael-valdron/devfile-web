@@ -10,7 +10,7 @@
       "executor": "@nrwl/cypress:cypress",
       "dependsOn": ["^build"],
       "options": {
-        "cypressConfig": "apps/landing-page-e2e/cypress.config.ts",
+        "cypressConfig": "apps/landing-page-e2e/cypress.config.js",
         "devServerTarget": "landing-page:serve:development",
         "testingType": "e2e"
       },

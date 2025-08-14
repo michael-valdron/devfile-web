@@ -10,7 +10,7 @@
       "executor": "@nrwl/cypress:cypress",
       "dependsOn": ["^build"],
       "options": {
-        "cypressConfig": "apps/registry-viewer-e2e/cypress.config.ts",
+        "cypressConfig": "apps/registry-viewer-e2e/cypress.config.js",
         "devServerTarget": "registry-viewer:serve:development",
         "testingType": "e2e"
       },
