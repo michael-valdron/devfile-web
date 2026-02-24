@@ -18,11 +18,11 @@ USER root
 
 # Install corepack & node-gyp dependency
 RUN microdnf install -y python3 gcc-c++ make && \
-  npm install --build-from-resource node-gyp && \
+  npm install --build-from-resource node-gyp@12.2.0 && \
   npm install -g corepack@0.34.6
 
 # Install yarn v4
-RUN corepack install -g yarn@4
+RUN corepack install -g yarn@4.12.0
 
 # Project non-specific args
 ARG PROJECT_NAME
@@ -64,7 +64,7 @@ USER root
 RUN npm install -g corepack@0.34.6
 
 # Install yarn v4
-RUN corepack install -g yarn@4
+RUN corepack install -g yarn@4.12.0
 
 # Project non-specific args
 ARG PROJECT_NAME
@@ -96,7 +96,7 @@ USER root
 RUN microdnf install shadow-utils -y
 
 # Install react-env to update environment variables during runtime
-RUN npm install -g @beam-australia/react-env
+RUN npm install -g @beam-australia/react-env@3.1.1
 
 # Project non-specific args
 ARG PROJECT_NAME
