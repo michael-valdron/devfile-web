@@ -1,16 +1,29 @@
 {
   "extends": [
-    "plugin:@nrwl/nx/react-typescript",
+    "plugin:@nx/react-typescript",
     "../../.eslintrc.json",
-    "next",
-    "next/core-web-vitals"
+    "plugin:@next/next/recommended-legacy",
+    "plugin:@next/next/core-web-vitals-legacy"
   ],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@next/next/no-html-link-for-pages": ["error", "apps/landing-page/pages"]
+        "@next/next/no-html-link-for-pages": ["error", "apps/landing-page/pages"],
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": ["../styles/**", "../navigation"],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ]
       }
     },
     {

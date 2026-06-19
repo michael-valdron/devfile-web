@@ -1,6 +1,7 @@
 libs/core/src/types/devfile-spec.ts
 apps/landing-page/pages/docs
 **/next-env.d.ts
+**/.next
 **/dist
 **/*/__ENV.js
 .yarn/

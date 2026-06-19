@@ -1,7 +1,10 @@
 {
+  "name": "landing-page",
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "apps/landing-page",
   "projectType": "application",
+  "tags": [],
+  "implicitDependencies": ["docs"],
   "targets": {
     "prebuild": {
       "executor": "nx:run-commands",
@@ -11,13 +14,13 @@
       }
     },
     "build": {
-      "executor": "@nrwl/next:build",
+      "executor": "@nx/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "dependsOn": ["prebuild"],
       "options": {
-        "root": "apps/landing-page",
-        "outputPath": "dist/apps/landing-page"
+        "outputPath": "dist/apps/landing-page",
+        "webpack": true
       },
       "configurations": {
         "development": {},
@@ -27,12 +30,15 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/next:server",
+      "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "dependsOn": ["prebuild"],
       "options": {
         "buildTarget": "landing-page:build",
-        "dev": true
+        "dev": true,
+        "webpack": true,
+        "port": 4200,
+        "hostname": "127.0.0.1"
       },
       "configurations": {
         "development": {
@@ -45,11 +51,23 @@
         }
       }
     },
-    "export": {
-      "executor": "@nrwl/next:export",
-      "dependsOn": ["build"],
+    "serve-standalone": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "dependsOn": ["build:production"],
       "options": {
-        "buildTarget": "landing-page:build:production"
+        "command": "node apps/landing-page/server.js",
+        "cwd": "apps/landing-page/dist/.next/standalone",
+        "env": {
+          "HOSTNAME": "127.0.0.1"
+        }
+      }
+    },
+    "export": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["prebuild"],
+      "options": {
+        "command": "NEXT_OUTPUT=export yarn nx run landing-page:build:production"
       }
     },
     "postexport": {
@@ -74,21 +92,19 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/landing-page"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/landing-page"],
       "options": {
         "jestConfig": "apps/landing-page/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/landing-page/**/*.{ts,tsx,js,jsx}"]
       }
     }
-  },
-  "tags": [],
-  "implicitDependencies": ["docs"]
+  }
 }

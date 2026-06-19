@@ -1,9 +1,8 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx", "eslint-comments", "promise", "unicorn", "license-header"],
+  "plugins": ["@nx", "eslint-comments", "promise", "unicorn", "license-header"],
   "extends": [
-    "plugin:@next/next/recommended",
     "airbnb",
     "airbnb/hooks",
     "plugin:eslint-comments/recommended",
@@ -22,7 +21,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@nx/enforce-module-boundaries": [
           "error",
           {
             "enforceBuildableLibDependency": true,
@@ -100,14 +99,16 @@
         "unicorn/no-null": "off",
         "unicorn/prefer-module": "off",
         "license-header/header": [ "error", "./license-header.js" ],
-        "unicorn/prefer-top-level-await": "off"
+        "unicorn/prefer-top-level-await": "off",
+        "unicorn/prefer-at": "off",
+        "unicorn/prefer-string-replace-all": "off"
       }
     },
     {
       "files": ["*.ts", "*.tsx"],
       "plugins": ["@typescript-eslint", "typescript-enum"],
       "extends": [
-        "plugin:@nrwl/nx/typescript",
+        "plugin:@nx/typescript",
         "airbnb-typescript",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -116,7 +117,7 @@
       ],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
-        "project": "./tsconfig.base.json",
+        "project": "./tsconfig.eslint.json",
         "ecmaVersion": 13,
         "sourceType": "module",
         "ecmaFeatures": {
@@ -162,13 +163,14 @@
     },
     {
       "files": ["*.js", "*.jsx", "*.mjs"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
+      "extends": ["plugin:@nx/javascript"],
       "rules": {
         // Allow CJS until ESM support improves
         "unicorn/prefer-module": "off",
         "unicorn/import-style": "off",
         "no-param-reassign": "off",
-        "import/extensions": "off"
+        "import/extensions": "off",
+        "import/no-unresolved": "off"
       }
     },
     {

@@ -1,30 +1,37 @@
 {
+  "name": "landing-page-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/landing-page-e2e/src",
   "projectType": "application",
+  "tags": [],
+  "implicitDependencies": ["landing-page"],
   "targets": {
     "e2e": {
-      "executor": "@nrwl/cypress:cypress",
+      "executor": "@nx/cypress:cypress",
       "dependsOn": ["^build"],
       "options": {
         "cypressConfig": "apps/landing-page-e2e/cypress.config.ts",
         "devServerTarget": "landing-page:serve:development",
-        "testingType": "e2e"
+        "testingType": "e2e",
+        "port": 4200
       },
       "configurations": {
         "production": {
-          "devServerTarget": "landing-page:serve:production"
+          "skipServe": true,
+          "baseUrl": "http://127.0.0.1:4200",
+          "browser": "chrome",
+          "env": {
+            "webServerCommand": "PORT=4200 HOSTNAME=127.0.0.1 yarn nx run landing-page:serve-standalone"
+          }
         }
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/landing-page-e2e/**/*.{js,ts}"]
       }
     }
-  },
-  "tags": [],
-  "implicitDependencies": ["landing-page"]
+  }
 }

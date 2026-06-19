@@ -57,6 +57,7 @@ import {
   useNavigation,
 } from '@devfile-web/core';
 import { promises as fs } from 'fs-extra';
+import { join } from 'node:path';
 import Link from 'next/link';
 import type { GetStaticProps } from 'next';
 import type { JSONSchema7 } from 'json-schema';
@@ -110,7 +111,7 @@ export function DevfileSchema(props: DevfileSchemaProps): JSX.Element {
 
 export const getStaticProps: GetStaticProps = async () => {
   const schemaString = await fs.readFile(
-    './apps/landing-page/public/devfile-schemas/${version}.json',
+    join(process.cwd(), 'public/devfile-schemas/${version}.json'),
     'utf8',
   );
   const schema = JSON.parse(schemaString) as JSONSchema7;

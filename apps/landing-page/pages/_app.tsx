@@ -42,7 +42,7 @@ const analyticsConfig = {
 function getNodeText(node: Tag): string {
   let text = '';
   for (const child of node?.children ?? []) {
-    text += Tag.isTag(child) ? getNodeText(child) : child;
+    text += Tag.isTag(child) ? getNodeText(child) : String(child);
   }
   return text;
 }

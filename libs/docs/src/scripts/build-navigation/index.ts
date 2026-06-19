@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/restrict-plus-operands */
 import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'fs-extra';
 import { join } from 'node:path';
 // @ts-ignore - no types available

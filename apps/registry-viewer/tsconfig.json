@@ -9,8 +9,7 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "incremental": true,
-    "types": ["jest", "node"]
+    "incremental": true
   },
   "include": [
     "**/*.ts",
@@ -19,6 +18,7 @@
     "**/*.jsx",
     "next-env.d.ts",
     "next.config.mjs",
+    "../../types/**/*.d.ts"
   ],
   "exclude": ["node_modules", "jest.config.ts"]
 }

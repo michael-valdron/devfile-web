@@ -43,7 +43,7 @@ export function DevfileCodeblock(props: DevfileCodeblockProps): JSX.Element {
     const timer = setTimeout(() => {
       setIsCopied(false);
     }, 2000);
-    return () => clearTimeout(timer);
+    return (): void => clearTimeout(timer);
   }, [copy, devfileYaml, dispatch, devfileName]);
 
   return (

@@ -43,7 +43,7 @@ export function Header(props: HeaderProps): JSX.Element {
     }
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => {
+    return (): void => {
       window.removeEventListener('scroll', onScroll);
     };
   }, []);

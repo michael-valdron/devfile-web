@@ -1,32 +1,10 @@
 {
-  "npmScope": "devfile-web",
-  "affected": {
-    "defaultBase": "main"
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/next"
-  },
   "implicitDependencies": {
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
     },
     ".eslintrc.json": "*"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/nx-cloud",
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "export",
-          "postexport",
-          "lint",
-          "test",
-          "e2e"
-        ]
-      }
-    }
   },
   "targetDependencies": {
     "build": [
@@ -37,17 +15,40 @@
     ]
   },
   "generators": {
-    "@nrwl/react": {
+    "@nx/react": {
       "application": {
         "babel": true
       }
     },
-    "@nrwl/next": {
+    "@nx/next": {
       "application": {
         "style": "css",
         "linter": "eslint"
       }
     }
   },
-  "defaultProject": "landing-page"
+  "defaultProject": "landing-page",
+  "targetDefaults": {
+    "build": {
+      "cache": true
+    },
+    "export": {
+      "cache": true
+    },
+    "postexport": {
+      "cache": true
+    },
+    "lint": {
+      "cache": true
+    },
+    "test": {
+      "cache": true
+    },
+    "e2e": {
+      "cache": true
+    }
+  },
+  "useInferencePlugins": false,
+  "defaultBase": "main",
+  "analytics": false
 }

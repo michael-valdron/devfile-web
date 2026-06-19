@@ -15,8 +15,24 @@
  */
 
 import { defineConfig } from 'cypress';
-import { nxE2EPreset } from '@nrwl/cypress/plugins/cypress-preset';
+import { nxE2EPreset } from '@nx/cypress/plugins/cypress-preset';
+
+const baseUrl = 'http://127.0.0.1:4200';
 
 export default defineConfig({
-  e2e: nxE2EPreset(__dirname),
+  e2e: {
+    ...nxE2EPreset(__dirname, {
+      webServerCommands: {
+        default: 'yarn nx run landing-page:serve:development',
+        production: 'PORT=4200 HOSTNAME=127.0.0.1 yarn nx run landing-page:serve-standalone',
+      },
+      ciWebServerCommand: 'PORT=4200 HOSTNAME=127.0.0.1 yarn nx run landing-page:serve-standalone',
+      ciBaseUrl: baseUrl,
+      webServerConfig: {
+        timeout: 120_000,
+        reuseExistingServer: false,
+      },
+    }),
+    baseUrl,
+  },
 });

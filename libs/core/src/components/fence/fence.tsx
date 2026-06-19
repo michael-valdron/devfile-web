@@ -43,7 +43,7 @@ export function Fence(props: FenceProps): JSX.Element {
     const timer = setTimeout(() => {
       setIsCopied(false);
     }, 2000);
-    return () => clearTimeout(timer);
+    return (): void => clearTimeout(timer);
   }, [children, copy]);
 
   const version = useMemo(() => selectedVersion.replace(/-.*$/, ''), [selectedVersion]);

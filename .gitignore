@@ -4,9 +4,15 @@
 dist
 /tmp
 /out-tsc
+.next
 
 # dependencies
 node_modules
+
+# Cypress
+**/cypress/downloads
+**/cypress/screenshots
+**/cypress/videos
 
 # IDEs and editors
 /.idea
@@ -53,3 +59,14 @@ Thumbs.db
 # .yarn files
 .yarn/install-state.gz
 .yarn/cache
+.yarn/berry
+
+# Tool caches
+.cache
+
+.nx/cache
+.nx/workspace-data
+.claude/worktrees
+.nx/polygraph
+.nx/self-healing
+.nx/migrate-runs

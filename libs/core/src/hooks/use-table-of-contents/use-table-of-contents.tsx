@@ -75,7 +75,7 @@ export function useTableOfContents(tableOfContents: TableOfContents[]): UseTable
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
-    return () => {
+    return (): void => {
       window.removeEventListener('scroll', onScroll);
     };
   }, [getHeadings, tableOfContents]);

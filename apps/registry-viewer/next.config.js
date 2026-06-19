@@ -15,7 +15,6 @@
  */
 
 const path = require('node:path');
-const withNx = require('@nrwl/next/plugins/with-nx');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -24,9 +23,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // Besides /devfile-web, the urls must be updated if NEXT_PUBLIC_BASE_PATH is changed.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
 
-/**
- * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
- * */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath,
   assetPrefix: basePath,
@@ -35,16 +32,9 @@ const nextConfig = {
   },
   pageExtensions: ['ts', 'tsx', 'md'],
   reactStrictMode: true,
-  swcMinify: true,
   output: 'standalone',
-  experimental: {
-    outputFileTracingRoot: path.join(__dirname, '../../'),
-  },
-  nx: {
-    svgr: false,
-  },
+  outputFileTracingRoot: path.join(__dirname, '../../'),
+  transpilePackages: ['@devfile-web/core'],
 };
 
-const plugins = [withBundleAnalyzer, withNx];
-
-module.exports = plugins.reduce((config, plugin) => plugin(config), nextConfig);
+module.exports = withBundleAnalyzer(nextConfig);

@@ -45,7 +45,9 @@ export default function createFastContext<Store extends object>(
 
     const subscribe = useCallback((callback: () => void) => {
       subscribers.current.add(callback);
-      return () => subscribers.current.delete(callback);
+      return (): void => {
+        subscribers.current.delete(callback);
+      };
     }, []);
 
     return {

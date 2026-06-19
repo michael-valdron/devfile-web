@@ -36,7 +36,7 @@ export function MobileNavigation(): JSX.Element {
     router.events.on('routeChangeComplete', onRouteChange);
     router.events.on('routeChangeError', onRouteChange);
 
-    return () => {
+    return (): void => {
       router.events.off('routeChangeComplete', onRouteChange);
       router.events.off('routeChangeError', onRouteChange);
     };
